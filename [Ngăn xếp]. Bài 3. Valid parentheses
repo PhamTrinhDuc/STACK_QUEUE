@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std ; 
+
+
+int main(){
+    string  s ; cin >> s ;
+    stack<char> st ;
+    for(char x :  s ){
+        if((x == ')' || x  ==   '}' || x ==  ']') && st.empty()) {
+            cout <<"NO" ; return 0 ; 
+        }
+        if(x == '(' || x == '[' || x== '{') st.push(x) ;
+        if(x==')'){
+            if(st.top()=='(') st.pop()   ;
+            else{
+                cout  <<"NO"  ; return 0  ;
+            }
+        }
+        if(x==']'){
+            if(st.top()=='[') st.pop()   ;
+            else{
+                cout  <<"NO"  ; return 0  ;
+            }
+        }
+        if(x=='}'){
+            if(st.top()=='{') st.pop()   ;
+            else{
+                cout  <<"NO"  ; return 0  ;
+            }
+        }
+    }
+    if(st.empty()) cout <<"YES" ;
+}
