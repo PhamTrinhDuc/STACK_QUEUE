@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std ; 
+int mod = 1e9 + 7 ; 
+int check(int a , int b, char k){
+    if(k=='*') return a*b ;
+    if(k=='/') return a/b ;
+    if(k=='+') return a +b ;
+    if(k=='-') return a-b  ;  
+    return 0   ; 
+}
+int main(){
+    string s ; cin  >> s  ;
+    stack<int>st ;
+    for(int i=s.size()-1 ; i>=0  ; i-- ){
+        if(isdigit(s[i]))  st.push(s[i]-'0') ;
+        else{
+            if(!st.empty()){
+                int op1 = st.top() ; st.pop() ; 
+                int op2  = st.top() ; st.pop() ;
+                int tmp  = check(op1 ,op2 ,  s[i] ) ;
+                st.push(tmp) ; 
+            }
+        }
+    }
+    cout << st.top() ;
+    return 0  ;
+}
