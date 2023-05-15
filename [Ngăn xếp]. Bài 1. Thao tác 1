@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std ; 
+
+
+int main(){
+    int t ; cin  >>  t ; 
+    stack<int> st ;  
+    while(t--){
+        string s ;
+        int x ;
+        cin >> s ;
+        if(s=="show"){
+            if(st.empty()) cout <<"EMPTY\n"  ;
+            else{
+                vector<int> v  ;
+                while(!st.empty()){
+                    v.push_back(st.top()) ;
+                    st.pop()  ;
+                }
+                reverse(v.begin() , v.end())  ;
+                for(int  x :  v ) {
+                    cout << x<<  ' '  ;
+                    st.push(x) ;
+                }
+                cout << endl ; 
+            }
+        }
+        else if(s=="push"){
+            cin >> x ;
+            st.push(x) ;
+        }
+        else{
+            if(!st.empty()) st.pop() ;
+        }
+    }
+    return 0 ;
+}
