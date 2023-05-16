@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+    int n ; cin >> n ; 
+    queue<string> q ;
+    q.push("1") ;
+    while(n--){
+        string tmp = q.front() ; q.pop() ; 
+        cout << tmp << ' ' ; 
+        q.push( tmp + "0" ) ;
+        q.push( tmp + "1" ) ; 
+    }
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    return 0;
+}
