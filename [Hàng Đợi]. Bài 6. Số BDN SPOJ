@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll unsigned long long
+
+vector<ll> v ;
+void ktao() {
+    queue<ll> q;
+    q.push(1);
+    while(1) {
+        ll top = q.front(); q.pop();
+        if(top >= pow(2, 63)) return;
+        v.push_back(top);
+        q.push(top * 10);
+        q.push(top * 10 + 1);
+    }
+}
+
+int main() {
+    ktao();
+    int t; cin >> t;
+    while(t--) {
+        long long n; cin >> n;
+        int cnt = 0;
+        for(ll i : v ) {
+            if(i < n) ++cnt;
+            else break;
+        }
+        cout << cnt << endl;
+    }
+}
