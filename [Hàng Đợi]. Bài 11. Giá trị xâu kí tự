@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+    int t  ; cin >> t ;
+    while(t--){
+        int k;  cin >> k ;
+        string s ;  cin >> s; 
+        map<char ,  int > mp ; 
+        priority_queue<int> pq  ;
+        for(char x : s ) mp[x]++ ;
+        for(char x : s ){
+            if(mp[x] > 0  ){
+                pq.push(mp[x]) ; 
+                mp[x] =  0  ;
+             }
+        }
+        while(!pq.empty() && k--){
+            int  top = pq.top() ; pq.pop() ;
+            if(top > 0 )
+                pq.push(top-1) ;
+        }
+        long long res =   0  ;
+        while(!pq.empty()){
+            res  +=  1ll*pq.top()*pq.top() ;
+            pq.pop() ;
+        }
+        cout <<   res << endl ; 
+    }    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    return 0;
+}
