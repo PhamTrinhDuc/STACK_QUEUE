@@ -1,0 +1,71 @@
+#include<bits/stdc++.h> 
+#define ll long long
+using namespace std ; 
+
+int height[1005][1005] , n , m ;
+int a[1005][1005]  ; 
+void solve(){
+    for(int j=0 ;j<m ; j++ ){
+        int cnt =0 ;
+        for(int i=0 ; i<n ;i++ ){
+            if(a[i][j]) cnt++ ;
+            else cnt = 0 ; 
+            height[j][i] = cnt ;
+        }
+    }
+}
+
+void nhohonbenphai(vector<int> v , int d[] , int n){
+    stack<int> st ; 
+    for(int i=0 ; i<n ; i++ ){
+        while(!st.empty() && v[i] < v[st.top()]){
+             d[st.top()] =  i ;
+             st.pop() ; 
+        }
+        st.push(i) ;
+    }
+    while(!st.empty()){
+        d[st.top()] = n ;
+        st.pop() ; 
+    }
+}
+
+void nhohonbentrai(vector<int>v , int d[] , int n ){
+    stack<int> st ; 
+    for(int i=n-1 ;i>=0 ; i--  ){
+        while(!st.empty() && v[i] < v[st.top()]){
+             d[st.top()] = i ;
+             st.pop() ; 
+        }
+        st.push(i) ;
+    }
+    while(!st.empty()){
+        d[st.top()] = -1 ;
+        st.pop() ; 
+    }
+}
+int main(){
+    cin >> n >> m ;
+    for(int i=0 ;i<n ;i++ ){
+        for(int j=0 ; j<m ; j++ ){
+            cin >> a[i][j] ; 
+        }
+    }
+    solve() ; 
+    ll res  = 0 ;  
+    for(int i=0 ; i<n ; i++ ){
+        vector<int> v ;
+        for(int j=0 ; j<m ; j++ ){
+            v.push_back(height[j][i]) ; 
+        }
+        int l[m] , r[m] ; 
+        nhohonbenphai(v , r , m ) ;
+        nhohonbentrai(v, l , m ) ; 
+        for(int j=0 ; j<m ; j++ ){
+            ll dt = 1ll*height[j][i]*(r[j]-l[j]-1) ; 
+            res = max(res , dt ) ; 
+        }
+    }
+    cout << res ; 
+    return 0 ; 
+}
