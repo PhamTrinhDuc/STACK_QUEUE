@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+
+int main() {
+    int t ; cin >> t ;
+    while(t--){
+        int n; cin >> n;
+        queue<string> q ;
+        vector<ll> v ;
+        q.push("8") ;
+        q.push("6") ; 
+        while(1){
+            string top = q.front() ; q.pop() ;
+            if(top.size() > n ) break ;
+            v.push_back(stoll(top)) ; 
+            q.push(top+"8") ;
+            q.push(top+"6") ;
+        }
+        sort(v.begin() , v.end() , greater<ll>()) ; 
+        for(ll x : v  ) cout << x << ' ' ; 
+        cout << endl ; 
+    }
+    return 0;
+}
