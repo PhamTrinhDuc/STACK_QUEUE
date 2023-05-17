@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+#define ll  long long    
+using namespace std;
+int dx[8] = {-2 , -2 ,  -1 , -1 , 1 , 1 , 2 ,2 } ;
+int dy[8] ={-1 ,  1 , -2 , 2 , -2 ,2 , -1 , 1 } ;
+int used[10][10]  ;
+int d[10][10] ;
+
+int bfs(int s , int t, int u , int v ){
+    used[s][t] = true ; 
+    queue<pair<int,int> >  q ;
+    q.push({s , t})  ;
+    d[s][t] = 0  ;
+    while(!q.empty()){
+        pair<int,int> top = q.front()   ; q.pop() ;
+        if(top.first == u && top.second == v ) return d[u][v] ;
+        
+        for(int k = 0 ; k<8 ; k++ ){
+            int i1 = top.first + dx[k] , j1 = top.second + dy[k] ;
+            if(i1>=1 && i1<=8 && j1>=1 && j1<=8 && !used[i1][j1]){
+                q.push({i1,j1}) ;
+                d[i1][j1] = d[top.first][top.second] + 1 ;
+                used[i1][j1] = true ;
+            }
+        }
+    }
+    return - 1;
+}
+
+int main() {
+    int t ; cin >>  t ;  
+    while(t--){
+        string a , b ; cin >> a >> b ; 
+        int s , t , u , v ;
+        s = 8-(a[1]-'0' ) + 1 ;
+        t = a[0] - 'a' + 1 ;
+        u = 8 - (b[1]  - '0') + 1  ;
+        v = b[0] -  'a' + 1 ; 
+        cout << bfs(s , t ,  u , v ) << endl ;
+        memset(used , false ,  sizeof(used)) ;
+        memset(d , 0 , sizeof(d)) ; 
+    }
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    return 0;
+}
