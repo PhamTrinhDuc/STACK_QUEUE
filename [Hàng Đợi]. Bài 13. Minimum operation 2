@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+#define ll  long long 
+#define fi first
+#define  se second 
+using namespace std;
+
+ll  bfs(ll n ){
+    queue<pair<ll,ll> > q ;
+    set<ll> se ;
+    se.insert(n) ; q.push({n  , 0}) ;
+    while(!q.empty()){
+        pair<ll , ll > top = q.front()  ; q.pop() ;
+        if(top.fi == 1 ) return top.se ;
+        
+        if(top.fi>0  &&  !se.count(top.fi-1)){
+            se.insert(top.fi-1) ;
+            q.push({top.fi-1 , top.se + 1 }) ; 
+        }
+        for(int i=2 ; i<=sqrt(top.fi) ; i++ ){
+            if(top.fi%i==0){
+                if(!se.count(max(1ll*i , top.fi/i) )) {
+                    q.push({max(1ll*i , top.fi/i) , top.se +1 }) ;
+                    se.insert(max(1ll*i , top.fi/i) ) ;    
+                }
+            }
+        }
+    }
+    return -1;
+}
+int main() {
+    int t ; cin >> t ;
+    while(t--){
+        ll n   ;  cin >> n;
+        cout << bfs(n) << endl ; 
+    }
+    return 0;
+}
